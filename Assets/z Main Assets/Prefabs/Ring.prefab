@@ -68,6 +68,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ringParticles: {fileID: 5919797426373047639}
+  mainObject: {fileID: 5919797426685717343}
 --- !u!1 &5919797426373047639
 GameObject:
   m_ObjectHideFlags: 0

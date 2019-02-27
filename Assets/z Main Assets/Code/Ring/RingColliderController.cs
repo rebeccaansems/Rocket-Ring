@@ -5,7 +5,7 @@ using UnityEngine;
 public class RingColliderController : MonoBehaviour
 {
     [SerializeField]
-    private GameObject ringParticles;
+    private GameObject ringParticles, mainObject;
 
     private void Start()
     {
@@ -20,8 +20,15 @@ public class RingColliderController : MonoBehaviour
             particles.gravityModifier = 2;
             particles.startSpeed = 2;
 
+            Score();
+
             StartCoroutine(DestroySystems(particles));
         }
+    }
+
+    private void Score()
+    {
+        GameController.instance.Player.GetComponent<PlayerMovement>().SpeedBoost();
     }
 
     IEnumerator DestroySystems(ParticleSystem.MainModule particles)
@@ -30,6 +37,9 @@ public class RingColliderController : MonoBehaviour
 
         yield return new WaitForSeconds(0.1f);
         particles.loop = false;
+
+        yield return new WaitForSeconds(1);
+        Destroy(mainObject);
     }
 
 }
