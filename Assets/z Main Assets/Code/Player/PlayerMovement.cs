@@ -10,11 +10,18 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         transform.position += new Vector3(0, speed * Time.deltaTime, 0);
+
+        SpeedDrain();
     }
 
     public void SpeedBoost()
     {
         this.GetComponent<Rigidbody>().AddForce(Vector3.up * speed * 2, ForceMode.Impulse);
-        speed += 0.1f;
+        speed += 0.15f;
+    }
+
+    private void SpeedDrain()
+    {
+        speed -= 0.001f;
     }
 }
