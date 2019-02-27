@@ -17,7 +17,8 @@ public class RingColliderController : MonoBehaviour
         if (collision.transform.tag == "Player")
         {
             ParticleSystem.MainModule particles = ringParticles.GetComponent<ParticleSystem>().main;
-            particles.startSpeed = 4;
+            particles.gravityModifier = 2;
+            particles.startSpeed = 2;
 
             StartCoroutine(DestroySystems(particles));
         }
