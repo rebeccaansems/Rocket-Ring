@@ -498,7 +498,7 @@ PrefabInstance:
     - target: {fileID: 5919797426685717336, guid: 9402f8ed50428984591169c0ae6dfcc0,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 15
+      value: 25.699997
       objectReference: {fileID: 0}
     - target: {fileID: 5919797426685717336, guid: 9402f8ed50428984591169c0ae6dfcc0,
         type: 3}
@@ -572,7 +572,7 @@ PrefabInstance:
     - target: {fileID: 5919797426685717336, guid: 9402f8ed50428984591169c0ae6dfcc0,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5
+      value: 15.7
       objectReference: {fileID: 0}
     - target: {fileID: 5919797426685717336, guid: 9402f8ed50428984591169c0ae6dfcc0,
         type: 3}
@@ -779,7 +779,7 @@ PrefabInstance:
     - target: {fileID: 5919797426685717336, guid: 9402f8ed50428984591169c0ae6dfcc0,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 10
+      value: 20.699997
       objectReference: {fileID: 0}
     - target: {fileID: 5919797426685717336, guid: 9402f8ed50428984591169c0ae6dfcc0,
         type: 3}
@@ -843,6 +843,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1025606701}
   - component: {fileID: 1025606703}
+  - component: {fileID: 1025606702}
   m_Layer: 5
   m_Name: In Game Panel
   m_TagString: Untagged
@@ -870,6 +871,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1025606702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1025606700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29db7b5af05902744af0ecc4779f5367, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  powerSlider: {fileID: 1846989499}
 --- !u!222 &1025606703
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -887,6 +901,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1192573059}
+  - component: {fileID: 1192573060}
   - component: {fileID: 1192573058}
   m_Layer: 0
   m_Name: Overall Controller
@@ -923,6 +938,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1192573060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1192573057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08baa3d19a3754108af85534c7824251, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TreatMousePointerAsFinger: 1
+  SimulateMouseWithTouches: 0
+  RequireControlKeyForMouseZoom: 1
+  PassThroughObjects: []
+  DefaultDPI: 200
+  LevelUnloadOption: 2
 --- !u!1 &1231356102
 GameObject:
   m_ObjectHideFlags: 0
@@ -1495,7 +1528,7 @@ PrefabInstance:
     - target: {fileID: 5919797426685717336, guid: 9402f8ed50428984591169c0ae6dfcc0,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 10.7
       objectReference: {fileID: 0}
     - target: {fileID: 5919797426685717336, guid: 9402f8ed50428984591169c0ae6dfcc0,
         type: 3}

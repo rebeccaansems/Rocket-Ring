@@ -10,5 +10,6 @@ public class CameraFollow : MonoBehaviour
     private void Update()
     {
         this.transform.position = GameController.instance.Player.transform.position + cameraOffset;
+        this.transform.position = new Vector3(0, this.transform.position.y, this.transform.position.z);
     }
 }

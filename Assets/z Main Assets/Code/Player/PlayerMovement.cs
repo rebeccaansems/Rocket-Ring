@@ -10,9 +10,13 @@ public class PlayerMovement : MonoBehaviour
 
     private TapGestureRecognizer tapGesture = new TapGestureRecognizer();
 
+    private SwipeGestureRecognizer swipeLeftGesture = new SwipeGestureRecognizer();
+    private SwipeGestureRecognizer swipeRightGesture = new SwipeGestureRecognizer();
+
     private void Start()
     {
         CreateTapGesture();
+        CreateSwipeGesture();
     }
 
     void Update()
@@ -45,6 +49,36 @@ public class PlayerMovement : MonoBehaviour
         UIPowerSliderController.instance.UpdatePowerBar(speed);
     }
 
+    #region Gestures
+    private void CreateSwipeGesture()
+    {
+        swipeLeftGesture = new SwipeGestureRecognizer();
+        swipeLeftGesture.Direction = SwipeGestureRecognizerDirection.Left;
+        swipeLeftGesture.StateUpdated += SwipeLeftGestureCallback;
+        FingersScript.Instance.AddGesture(swipeLeftGesture);
+
+        swipeRightGesture = new SwipeGestureRecognizer();
+        swipeRightGesture.Direction = SwipeGestureRecognizerDirection.Right;
+        swipeRightGesture.StateUpdated += SwipeRightGestureCallback;
+        FingersScript.Instance.AddGesture(swipeRightGesture);
+    }
+
+    private void SwipeLeftGestureCallback(GestureRecognizer gesture)
+    {
+        if (gesture.State == GestureRecognizerState.Ended)
+        {
+            Debug.Log("Left");
+        }
+    }
+
+    private void SwipeRightGestureCallback(GestureRecognizer gesture)
+    {
+        if (gesture.State == GestureRecognizerState.Ended)
+        {
+            Debug.Log("Right");
+        }
+    }
+
     private void CreateTapGesture()
     {
         tapGesture = new TapGestureRecognizer();
@@ -60,4 +94,5 @@ public class PlayerMovement : MonoBehaviour
             SpeedBoost(true);
         }
     }
+    #endregion
 }
