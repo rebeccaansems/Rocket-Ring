@@ -8,6 +8,12 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private float speed;
 
+    [SerializeField]
+    private float[] flyingLaneX;
+
+    private int currentLane = 2;
+
+
     private TapGestureRecognizer tapGesture = new TapGestureRecognizer();
 
     private SwipeGestureRecognizer swipeLeftGesture = new SwipeGestureRecognizer();
@@ -49,6 +55,14 @@ public class PlayerMovement : MonoBehaviour
         UIPowerSliderController.instance.UpdatePowerBar(speed);
     }
 
+    private void LaneJump(int direction)
+    {
+        currentLane += direction;
+        currentLane = Mathf.Clamp(currentLane, 0, flyingLaneX.Length - 1);
+
+        this.transform.position = new Vector2(flyingLaneX[currentLane], this.transform.position.y);
+    }
+
     #region Gestures
     private void CreateSwipeGesture()
     {
@@ -67,7 +81,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (gesture.State == GestureRecognizerState.Ended)
         {
-            Debug.Log("Left");
+            LaneJump(-1);
         }
     }
 
@@ -75,7 +89,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (gesture.State == GestureRecognizerState.Ended)
         {
-            Debug.Log("Right");
+            LaneJump(1);
         }
     }
 
