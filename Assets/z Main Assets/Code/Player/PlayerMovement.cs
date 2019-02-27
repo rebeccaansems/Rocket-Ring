@@ -18,10 +18,14 @@ public class PlayerMovement : MonoBehaviour
     {
         this.GetComponent<Rigidbody>().AddForce(Vector3.up * speed * 2, ForceMode.Impulse);
         speed += 0.15f;
+
+        UIPowerSliderController.instance.UpdatePowerBar(speed);
     }
 
     private void SpeedDrain()
     {
         speed -= 0.001f;
+
+        UIPowerSliderController.instance.UpdatePowerBar(speed);
     }
 }
