@@ -46,6 +46,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         UIPowerSliderController.instance.UpdatePowerBar(speed);
+        StartCoroutine(ZoomAnimator());
     }
 
     private void SpeedDrain()
@@ -61,6 +62,14 @@ public class PlayerMovement : MonoBehaviour
         currentLane = Mathf.Clamp(currentLane, 0, flyingLaneX.Length - 1);
 
         this.transform.position = new Vector2(flyingLaneX[currentLane], this.transform.position.y);
+    }
+
+    IEnumerator ZoomAnimator()
+    {
+        this.GetComponentInChildren<Animator>().SetBool("isZooming", true);
+
+        yield return new WaitForSeconds(0.5f);
+        this.GetComponentInChildren<Animator>().SetBool("isZooming", false);
     }
 
     #region Gestures
