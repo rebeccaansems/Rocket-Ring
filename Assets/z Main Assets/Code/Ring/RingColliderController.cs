@@ -28,7 +28,7 @@ public class RingColliderController : MonoBehaviour
 
     private void Score()
     {
-        GameController.instance.Player.GetComponent<PlayerMovement>().SpeedBoost();
+        GameController.instance.Player.GetComponent<PlayerMovement>().SpeedBoost(false);
     }
 
     IEnumerator DestroySystems(ParticleSystem.MainModule particles)
@@ -41,5 +41,4 @@ public class RingColliderController : MonoBehaviour
         yield return new WaitForSeconds(1);
         Destroy(mainObject);
     }
-
 }
