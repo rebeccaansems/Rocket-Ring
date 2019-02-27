@@ -6,12 +6,18 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField]
+    private AnimationCurve[] xCurve, rotationCurve;
+
+    [SerializeField]
     private float speed;
 
     [SerializeField]
     private float[] flyingLaneX;
 
-    private int currentLane = 2;
+    private int currentLane = 2, laneDirection;
+    private float timeElapsed, startPosX, startPosY;
+    private bool laneJumping = false;
+    private Vector3 eulerAngleVelocity;
 
 
     private TapGestureRecognizer tapGesture = new TapGestureRecognizer();
@@ -19,15 +25,50 @@ public class PlayerMovement : MonoBehaviour
     private SwipeGestureRecognizer swipeLeftGesture = new SwipeGestureRecognizer();
     private SwipeGestureRecognizer swipeRightGesture = new SwipeGestureRecognizer();
 
-    private void Start()
+    void Start()
     {
+        eulerAngleVelocity = new Vector3(0, 0, 0);
+
         CreateTapGesture();
         CreateSwipeGesture();
     }
 
-    void Update()
+    private void FixedUpdate()
     {
-        transform.position += new Vector3(0, speed * Time.deltaTime, 0);
+        float xMove = 0;
+        float yMove = 0;
+
+        if (laneJumping == false)
+        {
+            timeElapsed = 0;
+            startPosX = transform.position.x;
+
+            xMove = startPosX;
+
+            this.GetComponent<Rigidbody>().MovePosition(new Vector2(
+                startPosX,
+                startPosY + (speed * Time.deltaTime)
+                ));
+        }
+        else
+        {
+            timeElapsed += Time.deltaTime;
+
+            xMove = startPosX + xCurve[laneDirection].Evaluate(timeElapsed);
+
+            Quaternion deltaRotation = Quaternion.Euler(new Vector3(0, 0, rotationCurve[laneDirection].Evaluate(timeElapsed)));
+            this.GetComponent<Rigidbody>().MoveRotation(deltaRotation);
+
+            if (timeElapsed > xCurve[laneDirection].keys[xCurve[laneDirection].length - 1].time)
+            {
+                laneJumping = false;
+            }
+        }
+
+        startPosY = transform.position.y;
+        yMove = startPosY + (speed * Time.deltaTime);
+
+        this.GetComponent<Rigidbody>().MovePosition(new Vector2(xMove, yMove));
 
         SpeedDrain();
     }
@@ -58,10 +99,18 @@ public class PlayerMovement : MonoBehaviour
 
     private void LaneJump(int direction)
     {
-        currentLane += direction;
-        currentLane = Mathf.Clamp(currentLane, 0, flyingLaneX.Length - 1);
+        if (laneJumping == false)
+        {
+            int prevLane = currentLane;
+            currentLane += direction;
+            currentLane = Mathf.Clamp(currentLane, 0, flyingLaneX.Length - 1);
 
-        this.transform.position = new Vector2(flyingLaneX[currentLane], this.transform.position.y);
+            if (prevLane != currentLane)
+            {
+                laneDirection = Mathf.Clamp(direction, 0, 1);
+                laneJumping = true;
+            }
+        }
     }
 
     IEnumerator ZoomAnimator()
